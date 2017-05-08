@@ -1,12 +1,12 @@
 import React from 'react'
-
+import './Favorites.css';
 const Favorites = () =>{
 
 
   return(
     <div>
-      <h2>Category</h2>
+      <h2>Favorites</h2>
     </div>
   )
 }
-export default Category
+export default Favorites
