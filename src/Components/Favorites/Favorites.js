@@ -5,8 +5,8 @@ const Favorites = () =>{
 
   return(
     <div>
-      <h2>Category</h2>
+      <button className='favorites'>Favorites</button>
     </div>
   )
 }
-export default Category
+export default Favorites
