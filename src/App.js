@@ -11,7 +11,9 @@ class App extends Component {
       crawl: '',
       crawlTitle: '',
       crawlDate: '',
-      people: []
+      people: [],
+      planets: [],
+      vehicles: [],
     }
   }
 
@@ -19,6 +21,7 @@ class App extends Component {
     this.getPeople()
     this.getScroll()
     this.getPlanets()
+    this.getVehicles()
   }
 
   getScroll(){
@@ -40,7 +43,7 @@ class App extends Component {
     .then(response => response.json())
     .then((data)=>{
       let cleanedData = this.helper.cleanPeople(data)
-      this.setState({people: this.helper.cleanPeople(data)})
+      this.setState({people: cleanedData})
     })
   }
 
@@ -51,11 +54,22 @@ class App extends Component {
     .then(response => response.json())
     .then((data)=>{
       let cleanedData = this.helper.cleanPlanets(data)
+      this.setState({
+        planets: cleanedData
+      })
   })
+
 }
 
   getVehicles(){
-
+    fetch('http://swapi.co/api/vehicles')
+    .then(response => response.json())
+    .then((data)=>{
+      let cleanedData = this.helper.cleanVehicles(data)
+      this.setState({
+        vehicles: cleanedData
+      })
+  })
   }
 
   render() {
