@@ -1,38 +1,63 @@
 import React, { Component } from 'react';
 import './App.css';
-import StoryScroll from './Components/StoryScroll/StoryScroll.js';
-import Controls from './Components/Controls/Controls.js';
-import Favorites from './Components/Favorites/Favorites.js';
-
+import StoryScroll from './Components/StoryScroll/StoryScroll.js'
+import Helper from './Components/Helpers/helper.js'
 
 class App extends Component {
   constructor(data){
     super()
     this.helper = new Helper(data)
     this.state = {
-      crawl: ''
+      crawl: '',
+      crawlTitle: '',
+      crawlDate: '',
+      people: []
     }
   }
 
   componentDidMount(){
-    let num = this.helper.randomNumber()
+    this.getPeople()
+    this.getScroll()
+  }
+
+  getScroll(){
+    let num = this.helper.randomNumber();
     fetch(`http://swapi.co/api/films/${num}/`)
       .then((resp) => resp.json())
       .then((data) =>{
+        let cleanData = this.helper.cleanCrawl(data)
         this.setState({
-          crawl: data.opening_crawl
+          crawl : cleanData.crawl,
+          crawlTitle: cleanData.title,
+          crawlRelease: cleanData.release
         })
-      })
-    }
+    })
+  }
+
+  getPeople(){
+    fetch('http://swapi.co/api/people')
+    .then(response => response.json())
+    .then((data)=>{
+      let cleanedData = this.helper.cleanPeople(data)
+      console.log(cleanedData)
+      this.setState({people: this.helper.cleanPeople(data)})
+    })
+  }
 
 
+
+  getPlanets(){
+
+  }
+
+  getVehicles(){
+
+  }
 
   render() {
     return (
       <div className="App">
-        <Favorites />
         <StoryScroll scrollData = {this.state.crawl}/>
-        <Controls />
       </div>
     );
   }
