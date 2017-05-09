@@ -60,7 +60,27 @@ export default class Helper {
       }
       return acc;
     }, {});
-    console.log(cleaned);
+    let planetsArray = Object.keys(cleaned).map(key => {
+      return cleaned[key];
+    });
+    return planetsArray
+  }
+
+  cleanVehicles(data) {
+    let cleaned = data.results.reduce((acc, vehicle) => {
+      if (!acc[vehicle.name]) {
+        acc[vehicle.name] = {};
+        acc[vehicle.name].name = vehicle.name;
+        acc[vehicle.name].model = vehicle.model;
+        acc[vehicle.name].passengers = vehicle.passengers;
+        acc[vehicle.name].class = vehicle.vehicle_class;
+      }
+      return acc;
+    }, {});
+    let vehiclesArray = Object.keys(cleaned).map(key => {
+      return cleaned[key];
+    });
+    return vehiclesArray;
   }
 
   randomNumber() {
