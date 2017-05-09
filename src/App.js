@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import StoryScroll from './Components/StoryScroll/StoryScroll.js'
-import Helper from './Components/Helpers/helper.js'
+import StoryScroll from './Components/StoryScroll/StoryScroll.js';
+import Controls from './Components/Controls/Controls.js';
+import Favorites from './Components/Favorites/Favorites.js';
+
 
 class App extends Component {
   constructor(data){
@@ -23,10 +25,14 @@ class App extends Component {
       })
     }
 
+
+
   render() {
     return (
       <div className="App">
+        <Favorites />
         <StoryScroll scrollData = {this.state.crawl}/>
+        <Controls />
       </div>
     );
   }

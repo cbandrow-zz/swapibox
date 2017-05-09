@@ -4,8 +4,10 @@ const Controls = () =>{
 
 
   return(
-    <div>
-      <h2>Controls</h2>
+    <div class name = 'buttons'>
+    <button className='planets'>Planets</button>
+    <button className='people'>People</button>
+    <button className='vehicles'>Vehicles</button>
     </div>
   )
 }
