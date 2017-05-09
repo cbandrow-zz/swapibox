@@ -1,4 +1,5 @@
 import React from 'react'
+import './StoryScroll.css';
 
 const StoryScroll = ({ scrollData }) =>{
 
