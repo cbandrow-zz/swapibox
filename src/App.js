@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import StoryScroll from './Components/StoryScroll/StoryScroll.js';
 import Controls from './Components/Controls/Controls.js';
 import Favorites from './Components/Favorites/Favorites.js';
 
+
 class App extends Component {
-  constructor(){
+  constructor(data){
     super()
+    this.helper = new Helper(data)
     this.state = {
       crawl: ''
     }
   }
 
   componentDidMount(){
-    let num = Math.floor(Math.random() * (7- 1)) + 1;
+    let num = this.helper.randomNumber()
     fetch(`http://swapi.co/api/films/${num}/`)
       .then((resp) => resp.json())
       .then((data) =>{
