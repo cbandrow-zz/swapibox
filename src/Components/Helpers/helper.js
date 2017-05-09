@@ -32,16 +32,13 @@ export default class Helper{
             acc[person.name].language = type.language
             return
           })
-        console.log(acc)
       } return acc
-    }, {})
+    },{})
 
-    // let array = Object.keys(cleaned).map((key) =>{
-    //   return key[cleaned]
-    // })
-    //
-    // console.log(array)
-    return cleaned
+    let personArray = Object.keys(cleaned).map((key) =>{
+      return cleaned[key]
+    })
+    return personArray
   }
 
   planetMatch(){
