@@ -18,6 +18,7 @@ class App extends Component {
   componentDidMount(){
     this.getPeople()
     this.getScroll()
+    this.getPlanets()
   }
 
   getScroll(){
@@ -39,7 +40,6 @@ class App extends Component {
     .then(response => response.json())
     .then((data)=>{
       let cleanedData = this.helper.cleanPeople(data)
-      console.log(cleanedData)
       this.setState({people: this.helper.cleanPeople(data)})
     })
   }
@@ -47,8 +47,12 @@ class App extends Component {
 
 
   getPlanets(){
-
-  }
+    fetch('http://swapi.co/api/planets')
+    .then(response => response.json())
+    .then((data)=>{
+      let cleanedData = this.helper.cleanPlanets(data)
+  })
+}
 
   getVehicles(){
 
