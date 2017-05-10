@@ -2,80 +2,70 @@ import React, { Component } from 'react';
 import './App.css';
 import StoryScroll from './Components/StoryScroll/StoryScroll.js'
 import Helper from './Components/Helpers/helper.js'
+import Controls from './Components/Controls/Controls'
+import Favorites from './Components/Favorites/Favorites'
+import Card from './Components/Card/Card'
 
 class App extends Component {
   constructor(data){
     super()
     this.helper = new Helper(data)
     this.state = {
-      crawl: '',
-      crawlTitle: '',
-      crawlDate: '',
       people: [],
       planets: [],
       vehicles: [],
+      crawl: [],
+      selection: ''
     }
   }
-
   componentDidMount(){
-    this.getPeople()
-    this.getScroll()
-    this.getPlanets()
-    this.getVehicles()
+    this.allPromise().then((data) => {
+      let peopleData = this.helper.cleanPeople(data[0])
+      let planetData = this.helper.cleanPlanets(data[1])
+      let vehicleData = this.helper.cleanVehicles(data[2])
+      let crawlData = this.helper.cleanCrawl(data[3])
+      this.setState({
+        people: peopleData,
+        planets: planetData,
+        vehicles: vehicleData,
+        crawl: crawlData
+      })
+    })
   }
 
-  getScroll(){
+  allPromise(){
     let num = this.helper.randomNumber();
-    fetch(`http://swapi.co/api/films/${num}/`)
+    let people = fetch('http://swapi.co/api/people')
       .then((resp) => resp.json())
-      .then((data) =>{
-        let cleanData = this.helper.cleanCrawl(data)
-        this.setState({
-          crawl : cleanData.crawl,
-          crawlTitle: cleanData.title,
-          crawlRelease: cleanData.release
-        })
+    let place = fetch('http://swapi.co/api/planets')
+      .then((resp) => resp.json())
+    let vehicles = fetch('http://swapi.co/api/vehicles')
+      .then((resp) => resp.json())
+    let crawl = fetch(`http://swapi.co/api/films/${num}/`)
+      .then((resp) => resp.json())
+
+    return Promise.all([people, place, vehicles, crawl])
+    .then((promiseArray) => {
+      return promiseArray.map((promise)=>{
+        return promise
+      })
     })
   }
 
-  getPeople(){
-    fetch('http://swapi.co/api/people')
-    .then(response => response.json())
-    .then((data)=>{
-      let cleanedData = this.helper.cleanPeople(data)
-      this.setState({people: cleanedData})
+  showCards(selection){
+      this.setState({
+        selection: selection
     })
-  }
-
-
-
-  getPlanets(){
-    fetch('http://swapi.co/api/planets')
-    .then(response => response.json())
-    .then((data)=>{
-      let cleanedData = this.helper.cleanPlanets(data)
-      this.setState({
-        planets: cleanedData
-      })
-  })
-
-}
-
-  getVehicles(){
-    fetch('http://swapi.co/api/vehicles')
-    .then(response => response.json())
-    .then((data)=>{
-      let cleanedData = this.helper.cleanVehicles(data)
-      this.setState({
-        vehicles: cleanedData
-      })
-  })
   }
 
   render() {
     return (
       <div className="App">
+        <Card selection = {this.state.selection}
+              displayData = {this.state[this.state.selection]}/>
+        <Favorites/>
         <StoryScroll scrollData = {this.state.crawl}/>
+        <Controls buttonClick ={this.showCards.bind(this)}/>
       </div>
     );
   }
