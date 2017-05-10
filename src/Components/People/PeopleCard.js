@@ -4,7 +4,7 @@ const PeopleCard = () =>{
 
 
   return(
-    <div>
+    <div className = 'peopleCardInfo'>
       <h2>People Card</h2>
     </div>
   )
