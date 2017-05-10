@@ -12,7 +12,7 @@ const Category = ({ selection, displayData }) => {
         {displayData.map((person) =>{
           return(
             <div key={person.name}>
-              <h1>{person.name}</h1>
+            <PeopleCard data={person}/>
             </div>
           )
         })}
@@ -24,7 +24,7 @@ const Category = ({ selection, displayData }) => {
         {displayData.map((planet) =>{
           return (
             <div key={planet.name}>
-              <h1>{planet.name}</h1>
+              <PlanetCard data={planet}/>
             </div>
           )
         })}
@@ -36,7 +36,7 @@ const Category = ({ selection, displayData }) => {
         {displayData.map((vehicle) =>{
           return(
             <div key={vehicle.name}>
-              <h1>{vehicle.name}</h1>
+              <VehicleCard data = {vehicle}/>
             </div>
           )
         })}
