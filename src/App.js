@@ -5,6 +5,7 @@ import Helper from './Components/Helpers/helper.js'
 import Controls from './Components/Controls/Controls'
 import Favorites from './Components/Favorites/Favorites'
 import Card from './Components/Card/Card'
+import Category from './Components/Category/Category.js'
 
 class App extends Component {
   constructor(data){
@@ -61,11 +62,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Card selection = {this.state.selection}
-              displayData = {this.state[this.state.selection]}/>
         <Favorites/>
         <StoryScroll scrollData = {this.state.crawl}/>
         <Controls buttonClick ={this.showCards.bind(this)}/>
+        <Category
+        selection={this.state.selection}
+        displayData={this.state[this.state.selection]} />
       </div>
     );
   }

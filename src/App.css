@@ -1,5 +1,14 @@
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+}
+
+
+.storyScrollText{
+
+
+  border: solid red 1px;
 }
 
 .App-logo {
