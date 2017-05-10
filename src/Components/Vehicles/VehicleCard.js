@@ -1,11 +1,14 @@
 import React from 'react'
 import './Vehicles.css';
-const VehicleCard = () =>{
+const VehicleCard = ({data}) =>{
 
 
   return(
     <div>
-      <h2>Vehicle Card</h2>
+      <h2>{data.name}</h2>
+      <p>{data.model}</p>
+      <p>{data.class}</p>
+      <p>{data.passengers}</p>
     </div>
   )
 }
