@@ -5,7 +5,7 @@ const StoryScroll = ({ scrollData }) =>{
 
 
   return(
-    <div>
+    <div className = 'movieText'>
       <h2>{scrollData}</h2>
     </div>
   )

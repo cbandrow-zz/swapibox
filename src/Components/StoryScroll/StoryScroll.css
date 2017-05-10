@@ -1,0 +1,4 @@
+.movieText {
+  display:flex;
+  flex-direction: row;
+}

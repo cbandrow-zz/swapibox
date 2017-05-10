@@ -1,12 +1,17 @@
-import React from 'react'
-import './People.css';
-const PeopleCard = () =>{
+import React from "react";
+import "./People.css";
 
-
-  return(
+const PeopleCard = () => {
+  return (
     <div>
-      <h2>People Card</h2>
+      <div className="peopleCards">
+        <h4 className="personCardName"> Name: <button className="starFavorite"></button></h4>
+        <p > Homeworld: </p>
+        <p> Species: </p>
+        <p> Language: </p>
+        <p> Population: </p>
+      </div>
     </div>
-  )
-}
-export default PeopleCard
+  );
+};
+export default PeopleCard;

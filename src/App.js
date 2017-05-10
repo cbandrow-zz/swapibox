@@ -4,6 +4,9 @@ import StoryScroll from './Components/StoryScroll/StoryScroll.js'
 import Helper from './Components/Helpers/helper.js'
 import Controls from './Components/Controls/Controls.js'
 import Favorites from './Components/Favorites/Favorites.js'
+import PeopleCard from './Components/People/PeopleCard.js'
+import Category from './Components/Category/Category.js'
+
 
 class App extends Component {
   constructor(data){
@@ -80,6 +83,8 @@ class App extends Component {
       <Favorites />
         <StoryScroll scrollData = {this.state.crawl}/>
         <Controls />
+        <Category peopleData={this.state.people} />
+        <PeopleCard />
       </div>
     );
   }

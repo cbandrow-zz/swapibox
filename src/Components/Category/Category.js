@@ -1,11 +1,15 @@
 import React from 'react'
 import './Category.css';
-const Category = () =>{
+import './Components/People/PeopleCard.js';
 
+
+
+
+const Category = () =>{
 
   return(
     <div>
-      <h2>Category</h2>
+    <PeopleCard />
     </div>
   )
 }

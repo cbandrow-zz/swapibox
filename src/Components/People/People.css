@@ -1,0 +1,10 @@
+.peopleCards{
+  height: 250px;
+  width: 250px;
+  border: solid red 1px;
+}
+
+.starFavrotie{
+  border: solid blue 2px;
+  display: inline-table;
+}
