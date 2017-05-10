@@ -40,18 +40,25 @@ export default class Helper {
 
   cleanPlanets(data) {
     const endData = []
-    const residentsArray = data.results.map((planet) =>{
+    let residentsArray = []
+    data.results.forEach((planet) =>{
       endData.push(planet)
+      // console.log(planet.residents)
+      if(planet.residents) {
+        residentsArray = planet.residents.map((call) =>{
+          return fetch(call).then((resp) => resp.json())
+        })
 
-      console.log(planet.residents)
-      let promisedPlanets = planet.residents.map((residentURL)=>{
-        return fetch(planet.residents).then((resp) => resp.json())
-      })
+      }
+      // return fetch(planet.residents).then((resp) => resp.json())
       // return fetch(planet.residents).then((resp) => resp.json())
     })
+    return Promise.all(residentsArray).then(whatever => {
+      return whatever
+    })
 
-    return Promise.all(residentsArray).then((resident) =>{
-      console.log(resident)
+    // return Promise.all(residentsArray).then((resident) =>{
+    //   console.log(resident)
     //   resident.forEach((person, i) =>{
     //     let resiArray = []
     //     for(let j = 0; j <)
@@ -59,7 +66,7 @@ export default class Helper {
     //     Object.assign(endData[i], {residents: resiArray})
     //   })
     // }).then(() => endData)
-    })
+    // })
   }
 
 
