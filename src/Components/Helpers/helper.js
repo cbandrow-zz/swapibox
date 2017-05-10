@@ -8,7 +8,7 @@ export default class Helper {
       crawl: data.opening_crawl,
       release: data.release_date,
       title: data.title
-    };
+    }
     return cleanData;
   }
 
