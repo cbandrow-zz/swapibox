@@ -4,6 +4,7 @@ import StoryScroll from './Components/StoryScroll/StoryScroll.js'
 import Helper from './Components/Helpers/helper.js'
 import Controls from './Components/Controls/Controls'
 import Favorites from './Components/Favorites/Favorites'
+import Card from './Components/Card/Card'
 
 class App extends Component {
   constructor(data){
@@ -14,30 +15,10 @@ class App extends Component {
       planets: [],
       vehicles: [],
       crawl: [],
+      selection: ''
     }
   }
-
-  allPromise(){
-    let num = this.helper.randomNumber();
-    let people = fetch('http://swapi.co/api/people')
-      .then((resp) => resp.json())
-    let place = fetch('http://swapi.co/api/planets')
-      .then((resp) => resp.json())
-    let vehicles = fetch('http://swapi.co/api/vehicles')
-      .then((resp) => resp.json())
-    let crawl = fetch(`http://swapi.co/api/films/${num}/`)
-      .then((resp) => resp.json())
-
-    return Promise.all([people, place, vehicles, crawl])
-      .then((promiseArray) => {
-          return promiseArray.map((promise)=>{
-            return promise
-        })
-      })
-    }
-
   componentDidMount(){
-
     this.allPromise().then((data) => {
       let peopleData = this.helper.cleanPeople(data[0])
       let planetData = this.helper.cleanPlanets(data[1])
@@ -52,12 +33,41 @@ class App extends Component {
     })
   }
 
+  allPromise(){
+    let num = this.helper.randomNumber();
+    let people = fetch('http://swapi.co/api/people')
+      .then((resp) => resp.json())
+    let place = fetch('http://swapi.co/api/planets')
+      .then((resp) => resp.json())
+    let vehicles = fetch('http://swapi.co/api/vehicles')
+      .then((resp) => resp.json())
+    let crawl = fetch(`http://swapi.co/api/films/${num}/`)
+      .then((resp) => resp.json())
+
+    return Promise.all([people, place, vehicles, crawl])
+    .then((promiseArray) => {
+      return promiseArray.map((promise)=>{
+        return promise
+      })
+    })
+  }
+
+  showCards(selection){
+      this.setState({
+        selection: selection
+    })
+  }
+
+
+
   render() {
     return (
       <div className="App">
+        <Card selection = {this.state.selection}
+              displayData = {this.state[this.state.selection]}/>
         <Favorites/>
         <StoryScroll scrollData = {this.state.crawl}/>
-        <Controls/>
+        <Controls buttonClick ={this.showCards.bind(this)}/>
       </div>
     );
   }
