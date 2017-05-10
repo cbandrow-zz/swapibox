@@ -25,14 +25,17 @@ class App extends Component {
       let planetData = this.helper.cleanPlanets(data[1])
       let vehicleData = this.helper.cleanVehicles(data[2])
       let crawlData = this.helper.cleanCrawl(data[3])
-      this.setState({
-        people: peopleData,
-        planets: planetData,
-        vehicles: vehicleData,
-        crawl: crawlData
+      .then((promiseData) =>{
+        console.log(promiseData)
+        this.setState({
+          people: promiseData[0],
+          planets: promiseData[1],
+          vehicles: promiseData[2],
+          crawl: promiseData[3]
       })
     })
-  }
+  })
+}
 
   allPromise(){
     let num = this.helper.randomNumber();
@@ -53,6 +56,10 @@ class App extends Component {
     })
   }
 
+  favoriteCard(criteria){
+    console.log(criteria)
+  }
+
   showCards(selection){
       this.setState({
         selection: selection
@@ -66,7 +73,8 @@ class App extends Component {
         <StoryScroll scrollData = {this.state.crawl}/>
         <Controls buttonClick ={this.showCards.bind(this)}/>
         <Category selection={this.state.selection}
-                  displayData={this.state[this.state.selection]} />
+                  displayData={this.state[this.state.selection]}
+                  addFavorite ={this.favoriteCard.bind(this)}/>
       </div>
     );
   }

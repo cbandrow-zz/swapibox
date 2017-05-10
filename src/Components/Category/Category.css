@@ -1,3 +1,7 @@
-.cardPopulation{
+.category{
+  display: flex;
+  flex-wrap: wrap;
   border: dashed black 2px;
+  justify-content: space-around;
+  align-content: space-around;
 }

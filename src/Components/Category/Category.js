@@ -3,16 +3,16 @@ import "./Category.css";
 import PeopleCard from "../People/PeopleCard.js";
 import PlanetCard from "../Planets/PlanetCard.js";
 import VehicleCard from "../Vehicles/VehicleCard.js";
-const Category = ({ selection, displayData }) => {
-  console.log(selection)
-  console.log(displayData)
+const Category = ({ selection, displayData, addFavorite }) => {
   if (selection === "people"){
     return(
-      <div>
+      <div className = "category">
         {displayData.map((person) =>{
+          console.log(person)
           return(
             <div key={person.name}>
-            <PeopleCard data={person}/>
+            <PeopleCard data={person}
+                        addFavorite = {addFavorite}/>
             </div>
           )
         })}
@@ -20,11 +20,12 @@ const Category = ({ selection, displayData }) => {
     )
   } else if (selection === "planets"){
     return(
-      <div>
+      <div className = "category">
         {displayData.map((planet) =>{
           return (
             <div key={planet.name}>
-              <PlanetCard data={planet}/>
+              <PlanetCard data={planet}
+                          addFavorite = {addFavorite}/>
             </div>
           )
         })}
@@ -32,11 +33,12 @@ const Category = ({ selection, displayData }) => {
     )
   } else if (selection === "vehicles"){
     return(
-      <div>
+      <div className = "category">
         {displayData.map((vehicle) =>{
           return(
             <div key={vehicle.name}>
-              <VehicleCard data = {vehicle}/>
+              <VehicleCard data = {vehicle}
+                           addFavorite = {addFavorite}/>
             </div>
           )
         })}
