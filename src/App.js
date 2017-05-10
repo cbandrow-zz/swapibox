@@ -20,35 +20,45 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    this.allPromise().then((data) => {
-      let peopleData = this.helper.cleanPeople(data[0])
-      let planetData = this.helper.cleanPlanets(data[1])
-      let vehicleData = this.helper.cleanVehicles(data[2])
-      let crawlData = this.helper.cleanCrawl(data[3])
-      .then((promiseData) =>{
-        console.log(promiseData)
-        this.setState({
-          people: promiseData[0],
-          planets: promiseData[1],
-          vehicles: promiseData[2],
-          crawl: promiseData[3]
-      })
+    let num = this.helper.randomNumber();
+    let crawl = fetch(`http://swapi.co/api/films/${num}/`)
+      .then((resp) => resp.json())
+    this.setState({
+      craw: this.helper.cleanCrawl(crawl)
     })
-  })
-}
+
+    this.allPromise().then((data) => {
+      this.helper.cleanPeople(data[0]).then((endData) =>{
+        this.setState({
+          people: endData
+        })
+      })
+      this.helper.cleanPlanets(data[1]).then((endData) =>{
+        this.setState({
+          planets: endData
+        })
+      })
+      // let planetData = this.helper.cleanPlanets(data[1])
+      this.helper.cleanVehicles(data[2]).then((vehiclesArray) =>{
+        this.setState({
+          vehicles: vehiclesArray
+        })
+      })
+    }).catch((err) => console.log(err))
+  }
+
+
 
   allPromise(){
-    let num = this.helper.randomNumber();
+
     let people = fetch('http://swapi.co/api/people')
       .then((resp) => resp.json())
     let place = fetch('http://swapi.co/api/planets')
       .then((resp) => resp.json())
     let vehicles = fetch('http://swapi.co/api/vehicles')
       .then((resp) => resp.json())
-    let crawl = fetch(`http://swapi.co/api/films/${num}/`)
-      .then((resp) => resp.json())
 
-    return Promise.all([people, place, vehicles, crawl])
+    return Promise.all([people, place, vehicles])
     .then((promiseArray) => {
       return promiseArray.map((promise)=>{
         return promise
