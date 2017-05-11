@@ -1,5 +1,6 @@
 import React from 'react'
 import './StoryScroll.css';
+import PropTypes from 'prop-types'
 
 const StoryScroll = ({ scrollData }) =>{
 
@@ -15,4 +16,9 @@ const StoryScroll = ({ scrollData }) =>{
   </section>
   )
 }
+
+// StoryScroll.propTypes = {
+//   scrollData: PropTypes.object,
+// }
+
 export default StoryScroll

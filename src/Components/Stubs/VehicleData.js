@@ -1,4 +1,4 @@
-module.exports = 
+export const mockVehicles = 
 [
   {
     "count": 39,

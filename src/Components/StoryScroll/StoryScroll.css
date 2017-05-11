@@ -2,38 +2,42 @@
 
 #titles {
   display: inline-block;
-  position: relative;
-	width: 14em;
-	height: 50em;
-	/*bottom: 50%;*/
+  position: fixed;
+	width: 35%;
+	height: 100em;
+	bottom: 0;
 	left: 1%;
-	/*margin-left: -9em;*/
-	font-size: 25px;
+	/*margin-left: -10px;*/
+	font-size: 30px;
 	font-weight: bold;
-	text-align: justify;
+	text-align: left;
 	overflow: hidden;
-	transform-origin: 50% 100%;
-	transform: perspective(300px) rotateX(25deg);
+	transform-origin: 50% 99%;
+	transform: perspective(380px) rotateX(25deg);
+}
+
+#titles h2{
+  text-align: center;
 }
 
 #titles:after
 {
-  display: inline-block;
-	position: relative;
+	position: fixed;
 	content: ' ';
 	left: 0;
 	right: 0;
-	top: 0;
-	bottom: 50%;
+	top: ;
+	bottom: 20%;
 	background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
 	pointer-events: none;
 }
+
 
 #titlecontent{
   display:inline-block;
 	position: relative;
 	top: 100%;
-	animation: scroll 100s linear 4s infinite;
+	animation: scroll 60s linear 4s infinite;
 }
 
 @keyframes scroll {

@@ -1,5 +1,6 @@
 import React from 'react'
 import './Controls.css';
+import PropTypes from 'prop-types'
 
 
 const Controls = ({buttonClick}) =>{
@@ -16,5 +17,9 @@ const Controls = ({buttonClick}) =>{
     </button>
     </div>
   )
+}
+
+Controls.propTypes = {
+  buttonClick: PropTypes.func,
 }
 export default Controls

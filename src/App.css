@@ -2,14 +2,14 @@
   padding: 5%;
   display: flex;
   text-align: center;
-  background-color: red;
+  background-color: #bdbdbd;
 }
 
 .storyScroll{
   display: flex;
-  width: 30%;
-  color: #757575;
+  width: 40%;
   flex-direction: column;
+  height: auto;
   border: solid red 1px;
 }
 
@@ -18,5 +18,4 @@
   width: 60%;
   flex-direction: column;
   justify-content: space-between;
-
 }
