@@ -23,6 +23,7 @@ class App extends Component {
 
   componentDidMount(){
     let num = this.helper.randomNumber();
+    this.allPromise();
     fetch(`http://swapi.co/api/films/${num}/`).then((resp) =>  resp.json()).then((data) =>{
         this.setState({
           crawl : this.helper.cleanCrawl(data)
@@ -32,43 +33,43 @@ class App extends Component {
           errorStatus: 'Error fetching Films'
         })
       })
-    this.allPromise().then((data) => {
-      this.helper.cleanPeople(data[0]).then((endData) =>{
-        this.setState({
-          people: endData
-        })
-      }).catch((err) => {
-        this.setState({
-          errorStatus: 'Error fetching people'
-        })
-      })
-      let planetEnd = this.helper.cleanPlanets(data[1])
-      let vehicleEnd = this.helper.cleanVehicles(data[2])
-      this.setState({
-        planets: planetEnd,
-        vehicles: vehicleEnd
-      })
-    }).catch((err) => {
-      this.setState({
-        errorStatus: 'Error fetching Planets or Vehicles'
-      })
-    })
   }
 
   allPromise(){
-    let people = fetch('http://swapi.co/api/people')
-      .then((resp) => resp.json())
-    let place = fetch('http://swapi.co/api/planets')
-      .then((resp) => resp.json())
-    let vehicles = fetch('http://swapi.co/api/vehicles')
-      .then((resp) => resp.json())
-
-    return Promise.all([people, place, vehicles])
-    .then((promiseArray) => {
-      return promiseArray.map((promise)=>{
-        return promise
+    fetch('http://swapi.co/api/people')
+      .then((resp) => resp.json()).then((data) =>{
+        this.helper.cleanPeople(data).then((endData) =>{
+            this.setState({
+              people: endData
+            })
+          })
+        }).catch((err) => {
+          this.setState({
+            errorStatus: 'Error fetching people'
+        })
       })
-    }).catch((err) => console.log(err))
+
+    fetch('http://swapi.co/api/planets')
+      .then((resp) => resp.json()).then((data) =>{
+        this.setState({
+          planets: this.helper.cleanPlanets(data)
+        })
+      }).catch((err) => {
+        this.setState({
+          errorStatus: 'Error fetching planets'
+        })
+      })
+
+    fetch('http://swapi.co/api/vehicles')
+      .then((resp) => resp.json()).then((data) =>{
+        this.setState({
+          vehicles: this.helper.cleanVehicles(data)
+        })
+      }).catch((err) => {
+        this.setState({
+          errorStatus: 'Error fetching vehicles'
+      })
+    })
   }
 
   updateFavorites(favObj){
