@@ -16,9 +16,19 @@ class App extends Component {
       planets: [],
       vehicles: [],
       crawl: [],
-      selection: ""
+      selection: "",
+      favorites: []
     };
   }
+
+  updateFavorites(favObj){
+  let favoritesArray = this.state.favorites
+    favoritesArray.push(favObj)
+    this.setState({
+      favorites: favoritesArray
+    })
+  }
+
   componentDidMount() {
     this.allPromise().then(data => {
       let peopleData = this.helper.cleanPeople(data[0]);
@@ -67,12 +77,13 @@ class App extends Component {
         </div>
 
         <div className='display'>
-          <Favorites />
+          <Favorites favorites={this.state.favorites.bind(this)}/>
           <Controls buttonClick={this.showCards.bind(this)} />
 
           <Category
             selection={this.state.selection}
             displayData={this.state[this.state.selection]}
+            addFavorite={this.updateFavorites.bind(this)}
           />
         </div>
       </div>
