@@ -1,4 +1,9 @@
 .buttons{
-  border:solid orange 1px;
+  display:flex;
+  padding: 2%;
+  justify-content: space-around;
+  height: 30px;
+  padding-top: 10%;
+  font-family: 'Merriweather', serif;
   
 }

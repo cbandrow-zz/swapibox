@@ -1,44 +1,22 @@
 .App {
+  padding: 5%;
   display: flex;
   text-align: center;
+  background-color: red;
 }
-
-<<<<<<< HEAD
-=======
 
 .storyScroll{
   display: flex;
   width: 30%;
-
+  color: #757575;
   flex-direction: column;
-
   border: solid red 1px;
 }
 
 .display{
   display: flex-wrap;
+  width: 60%;
   flex-direction: column;
+  justify-content: space-between;
 
-}
-
->>>>>>> master
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
