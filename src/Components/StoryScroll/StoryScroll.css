@@ -1,15 +1,11 @@
-.scroll{
-  display: inline-block;
-  width: 33%;
-  height: 200px;
-}
+
 
 #titles {
   display: inline-block;
   position: relative;
 	width: 14em;
 	height: 50em;
-	bottom: 0%;
+	/*bottom: 50%;*/
 	left: 1%;
 	/*margin-left: -9em;*/
 	font-size: 25px;
