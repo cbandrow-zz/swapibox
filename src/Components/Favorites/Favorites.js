@@ -8,6 +8,7 @@ const Favorites = () =>{
     <div>
       console.log(array.length)
       <button className='favorites'>Favorites</button>
+      <div className='favoritesDisplay'>Yo</div>
     </div>
   )
 }
