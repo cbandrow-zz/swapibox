@@ -1,1 +1,46 @@
+.scroll{
+  display: inline-block;
+  width: 33%;
+  height: 200px;
+}
 
+#titles {
+  display: inline-block;
+  position: relative;
+	width: 14em;
+	height: 50em;
+	bottom: 0%;
+	left: 1%;
+	/*margin-left: -9em;*/
+	font-size: 25px;
+	font-weight: bold;
+	text-align: justify;
+	overflow: hidden;
+	transform-origin: 50% 100%;
+	transform: perspective(300px) rotateX(25deg);
+}
+
+#titles:after
+{
+  display: inline-block;
+	position: relative;
+	content: ' ';
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 50%;
+	background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+	pointer-events: none;
+}
+
+#titlecontent{
+  display:inline-block;
+	position: relative;
+	top: 100%;
+	animation: scroll 100s linear 4s infinite;
+}
+
+@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}

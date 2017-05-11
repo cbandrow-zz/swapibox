@@ -71,7 +71,8 @@ class App extends Component {
     return (
       <div className="App">
         <Favorites/>
-        <StoryScroll scrollData = {this.state.crawl}/>
+        <StoryScroll scrollData = {this.state.crawl}
+                      className = "scroll"/>
         <Controls buttonClick ={this.showCards.bind(this)}/>
         <Category selection={this.state.selection}
                   displayData={this.state[this.state.selection]}
