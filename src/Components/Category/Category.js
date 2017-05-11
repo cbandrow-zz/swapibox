@@ -3,8 +3,39 @@ import "./Category.css";
 import PeopleCard from "../People/PeopleCard.js";
 import PlanetCard from "../Planets/PlanetCard.js";
 import VehicleCard from "../Vehicles/VehicleCard.js";
+// import FavoriteCard from "../FavoritesCard/FavoriteCard.js"
 const Category = ({ selection, displayData, addFavorite }) => {
-  if (selection === "people"){
+  if (selection === "favorites"){
+    return(
+      <div className = "category">
+        {displayData.map((favorite) =>{
+          console.log(favorite.type)
+          if(favorite.type === "person"){
+            return(
+              <div key = {favorite.name}>
+                <PeopleCard data={favorite}
+                            addFavorite = {addFavorite}/>
+              </div>
+            )
+          } else if (favorite.type === "planet"){
+            return(
+              <div key = {favorite.name}>
+                <PlanetCard data={favorite}
+                            addFavorite = {addFavorite}/>
+              </div>
+            )
+          } else if(favorite.type === "vehicle"){
+            return(
+              <div key = {favorite.name}>
+                <VehicleCard data = {favorite}
+                             addFavorite = {addFavorite}/>
+              </div>
+            )
+          }
+      })}
+      </div>
+    )
+  } else if (selection === "people"){
     return(
       <div className = "category">
         {displayData.map((person) =>{
