@@ -1,6 +1,6 @@
 import React from 'react'
 import './Vehicles.css';
-const VehicleCard = ({data, addFavorite}) =>{
+const VehicleCard = ({data, addFavorite, favorites}) =>{
 
 
   const favoritesUpdate = (data)=>{
@@ -10,7 +10,7 @@ const VehicleCard = ({data, addFavorite}) =>{
   return(
     <div className = "vehicleCardInfo">
       <h2>{data.name}</h2>
-      <div className = "favoriteDiv"
+      <div className = {`favoriteDiv ${favoriteCss(data, favorites)}`}
            onClick = {()=>favoritesUpdate(data)}>
         <p>FAV</p>
       </div>
@@ -19,5 +19,13 @@ const VehicleCard = ({data, addFavorite}) =>{
       <p>{data.passengers}</p>
     </div>
   )
+}
+
+const favoriteCss = (data, favorites) =>{
+  if(favorites.includes(data)){
+    return 'favorite'
+  } else {
+    return undefined
+  }
 }
 export default VehicleCard

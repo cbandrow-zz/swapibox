@@ -1,6 +1,6 @@
 import React from 'react'
 import './Planets.css';
-const PlanetCard = ({data, addFavorite}) =>{
+const PlanetCard = ({data, addFavorite, favorites}) =>{
 
 const favoritesUpdate = (data) =>{
   addFavorite(data)
@@ -9,8 +9,8 @@ const favoritesUpdate = (data) =>{
   return(
     <div className = "planetCardInfo">
       <h2>{data.name}</h2>
-      <div className = "favoriteDiv"
-            onClick={()=>favoritesUpdate(data)}>
+      <div className = {`favoriteDiv ${favoriteCss(data, favorites)}`}
+           onClick = {()=>favoritesUpdate(data)}>
         <p>FAV</p>
       </div>
       <p>{data.terrain}</p>
@@ -19,5 +19,13 @@ const favoritesUpdate = (data) =>{
       <p>{`${data.residents} `}</p>
     </div>
   )
+}
+
+const favoriteCss = (data, favorites) =>{
+  if(favorites.includes(data)){
+    return 'favorite'
+  } else {
+    return undefined
+  }
 }
 export default PlanetCard
