@@ -3,11 +3,17 @@ import './People.css';
 const PeopleCard = ({data, addFavorite}) =>{
 
 
+
+
+const favoritesUpdate = (data)=>{
+  addFavorite(data)
+}
+
   return(
     <div className = 'peopleCardInfo'>
       <h2>{data.name}</h2>
       <div className = "favoriteDiv"
-           onClick = {()=>addFavorite(data.name)}>
+           onClick = {()=>favoritesUpdate(data)}>
         <p>FAV</p>
       </div>
       <p>{data.homeworld}</p>

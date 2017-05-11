@@ -1,9 +1,27 @@
 .App {
   display: flex;
-  flex-direction: column;
   text-align: center;
 }
 
+<<<<<<< HEAD
+=======
+
+.storyScroll{
+  display: flex;
+  width: 30%;
+
+  flex-direction: column;
+
+  border: solid red 1px;
+}
+
+.display{
+  display: flex-wrap;
+  flex-direction: column;
+
+}
+
+>>>>>>> master
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

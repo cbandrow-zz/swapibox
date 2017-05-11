@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
-import './App.css';
-import StoryScroll from './Components/StoryScroll/StoryScroll.js'
-import Helper from './Components/Helpers/helper.js'
-import Controls from './Components/Controls/Controls'
-import Favorites from './Components/Favorites/Favorites'
-import Card from './Components/Card/Card'
-import Category from './Components/Category/Category.js'
+import React, { Component } from "react";
+import "./App.css";
+import StoryScroll from "./Components/StoryScroll/StoryScroll.js";
+import Helper from "./Components/Helpers/helper.js";
+import Controls from "./Components/Controls/Controls";
+import Favorites from "./Components/Favorites/Favorites";
+import Card from "./Components/Card/Card";
+import Category from "./Components/Category/Category.js";
 
 class App extends Component {
-  constructor(data){
-    super()
-    this.helper = new Helper(data)
+  constructor(data) {
+    super();
+    this.helper = new Helper(data);
     this.state = {
       people: [],
       planets: [],
       vehicles: [],
       crawl: [],
-      selection: ''
-    }
+      selection: "",
+      favorites: []
+    };
   }
+
   componentDidMount(){
     let num = this.helper.randomNumber();
     fetch(`http://swapi.co/api/films/${num}/`).then((resp) =>  resp.json()).then((data) =>{
@@ -57,26 +59,43 @@ class App extends Component {
     }).catch((err) => console.log(err))
   }
 
-  favoriteCard(criteria){
-    console.log(criteria)
+  updateFavorites(favObj){
+  let favoritesArray = this.state.favorites
+  if(favoritesArray.includes(favObj)){
+    let newFavoritesArray = favoritesArray.filter((obj)=>{
+      return obj !== favObj
+    })
+    this.setState({
+      favorites: newFavoritesArray
+    })
+    return
+  }
+    favoritesArray.push(favObj)
+    this.setState({
+      favorites: favoritesArray
+    })
   }
 
-  showCards(selection){
-      this.setState({
-        selection: selection
-    })
+  showCards(selection) {
+    this.setState({
+      selection: selection
+    });
   }
 
   render() {
     return (
       <div className="App">
-        <Favorites/>
-        <StoryScroll scrollData = {this.state.crawl}
-                      className = "scroll"/>
-        <Controls buttonClick ={this.showCards.bind(this)}/>
-        <Category selection={this.state.selection}
-                  displayData={this.state[this.state.selection]}
-                  addFavorite ={this.favoriteCard.bind(this)}/>
+        <div className='storyScroll'>
+          <StoryScroll scrollData={this.state.crawl} />
+        </div>
+        <div className='display'>
+          <Favorites favorite={this.state.favorites} />
+          <Controls buttonClick={this.showCards.bind(this)} />
+          <Category
+            selection={this.state.selection}
+            displayData={this.state[this.state.selection]}
+            addFavorite={this.updateFavorites.bind(this)} />
+        </div>
       </div>
     );
   }
