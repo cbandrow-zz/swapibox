@@ -82,7 +82,7 @@ const Category = ({ selection, displayData, addFavorite, favorites }) => {
     )
   }
   return(
-    <div>Select a Category</div>
+    <div className = 'Category'>Select a Category</div>
   )
 };
 export default Category

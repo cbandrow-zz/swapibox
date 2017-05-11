@@ -88,15 +88,20 @@ class App extends Component {
         <div className='storyScroll'>
           <StoryScroll scrollData={this.state.crawl} />
         </div>
+
         <div className='display'>
           <Favorites favorite={this.state.favorites}
                      buttonClick = {this.showCards.bind(this)}/>
+
           <Controls buttonClick={this.showCards.bind(this)} />
+
+
           <Category
             selection={this.state.selection}
             displayData={this.state[this.state.selection]}
             addFavorite={this.updateFavorites.bind(this)}
             favorites = {this.state.favorites}/>
+            
         </div>
       </div>
     );

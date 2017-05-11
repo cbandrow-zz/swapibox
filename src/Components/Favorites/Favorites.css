@@ -1,0 +1,18 @@
+
+
+
+.favorites{
+  display:flex;
+  display:inline;
+  border:solid orange 1px;
+  display: table-row;
+  height: 30px;
+  float: right;
+  vertical-align: top;
+}
+
+h1{
+display: inline;
+padding: 5px;
+font-family: 'Merriweather', serif;
+}
