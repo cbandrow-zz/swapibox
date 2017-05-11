@@ -1,14 +1,22 @@
 .App {
   display: flex;
-  flex-direction: column;
   text-align: center;
 }
 
 
-.storyScrollText{
+.storyScroll{
+  display: flex;
+  width: 30%;
 
+  flex-direction: column;
 
   border: solid red 1px;
+}
+
+.display{
+  display: flex-wrap;
+  flex-direction: column;
+
 }
 
 .App-logo {
