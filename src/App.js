@@ -23,31 +23,24 @@ class App extends Component {
     let num = this.helper.randomNumber();
     let crawl = fetch(`http://swapi.co/api/films/${num}/`)
       .then((resp) => resp.json())
+    let crawlEnd = this.helper.cleanCrawl(crawl)
     this.setState({
-      craw: this.helper.cleanCrawl(crawl)
+      crawl: crawlEnd
     })
-
     this.allPromise().then((data) => {
       this.helper.cleanPeople(data[0]).then((endData) =>{
         this.setState({
           people: endData
         })
       })
-      this.helper.cleanPlanets(data[1]).then((endData) =>{
-        this.setState({
-          planets: endData
-        })
-      })
-      // let planetData = this.helper.cleanPlanets(data[1])
-      this.helper.cleanVehicles(data[2]).then((vehiclesArray) =>{
-        this.setState({
-          vehicles: vehiclesArray
-        })
+      let planetEnd = this.helper.cleanPlanets(data[1])
+      let vehicleEnd = this.helper.cleanVehicles(data[2])
+      this.setState({
+        planets: planetEnd,
+        vehicles: vehicleEnd
       })
     }).catch((err) => console.log(err))
   }
-
-
 
   allPromise(){
 

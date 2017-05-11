@@ -41,58 +41,28 @@ export default class Helper {
   cleanPlanets(data) {
     const endData = []
     let residentsArray = []
-    data.results.forEach((planet) =>{
+
+     data.results.forEach((planet, i) =>{
       endData.push(planet)
-      // console.log(planet.residents)
-      if(planet.residents) {
-        residentsArray = planet.residents.map((call) =>{
-          return fetch(call).then((resp) => resp.json())
-        })
+      residentsArray = planet.residents.map((call) =>{
+         return fetch(call).then((resp) => resp.json())
+       })
+       Promise.all(residentsArray).then((resident) =>{
+         let people = []
+         resident.forEach((item) =>{
+           if(item.name === "undefined"){
+             people.push('none')
+           } else {
+             people.push(item.name)
+           }
+           Object.assign(endData[i], {residents: people})
+         })
+       })
+       return residentsArray
+     })
+     return endData
+   }
 
-      }
-      // return fetch(planet.residents).then((resp) => resp.json())
-      // return fetch(planet.residents).then((resp) => resp.json())
-    })
-    return Promise.all(residentsArray).then(whatever => {
-      return whatever
-    })
-
-    // return Promise.all(residentsArray).then((resident) =>{
-    //   console.log(resident)
-    //   resident.forEach((person, i) =>{
-    //     let resiArray = []
-    //     for(let j = 0; j <)
-    //     resiArray.push(person.name)
-    //     Object.assign(endData[i], {residents: resiArray})
-    //   })
-    // }).then(() => endData)
-    // })
-  }
-
-
-    // name, terrain, population, climate, residents
-    // let cleaned = data.results.reduce((acc, planet) => {
-    //   if (!acc[planet.name]) {
-    //     acc[planet.name] = {};
-    //     acc[planet.name].name = planet.name;
-    //     acc[planet.name].terrain = planet.terrain;
-    //     acc[planet.name].climate = planet.climate;
-    //     acc[planet.name].population = planet.population;
-    //     acc[planet.name].residents = [];
-    //
-    //     planet.residents.forEach(resident => {
-    //       fetch(resident).then(response => response.json()).then(resident => {
-    //         acc[planet.name].residents.push(resident.name);
-    //         return;
-    //       });
-    //     });
-    //   }
-    //   return acc;
-    // }, {});
-    // let planetsArray = Object.keys(cleaned).map(key => {
-    //   return cleaned[key];
-    // });
-    // return planetsArray
 
   cleanVehicles(data) {
     let cleaned = data.results.reduce((acc, vehicle) => {
