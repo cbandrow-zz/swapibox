@@ -1,12 +1,11 @@
 import React from 'react'
 import './Vehicles.css';
+import PropTypes from 'prop-types'
+
 const VehicleCard = ({data, addFavorite, favorites}) =>{
-
-
   const favoritesUpdate = (data)=>{
     addFavorite(data)
   }
-
   return(
     <div className = "vehicleCardInfo">
       <h2>{data.name}</h2>
@@ -28,4 +27,11 @@ const favoriteCss = (data, favorites) =>{
     return undefined
   }
 }
+
+VehicleCard.propTypes = {
+  data: PropTypes.object,
+  addFavorite: PropTypes.func,
+  favorites: PropTypes.array
+}
+
 export default VehicleCard

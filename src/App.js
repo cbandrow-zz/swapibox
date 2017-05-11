@@ -4,7 +4,6 @@ import StoryScroll from "./Components/StoryScroll/StoryScroll.js";
 import Helper from "./Components/Helpers/helper.js";
 import Controls from "./Components/Controls/Controls";
 import Favorites from "./Components/Favorites/Favorites";
-import Card from "./Components/Card/Card";
 import Category from "./Components/Category/Category.js";
 
 class App extends Component {

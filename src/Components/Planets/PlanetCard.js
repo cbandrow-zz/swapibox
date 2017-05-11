@@ -1,5 +1,6 @@
 import React from 'react'
 import './Planets.css';
+import PropTypes from 'prop-types'
 const PlanetCard = ({data, addFavorite, favorites}) =>{
 
 const favoritesUpdate = (data) =>{
@@ -27,5 +28,11 @@ const favoriteCss = (data, favorites) =>{
   } else {
     return undefined
   }
+}
+
+PlanetCard.propTypes = {
+  data: PropTypes.object,
+  addFavorite: PropTypes.func,
+  favorites: PropTypes.array
 }
 export default PlanetCard
