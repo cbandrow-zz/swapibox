@@ -2,9 +2,6 @@ import React from 'react'
 import './People.css';
 const PeopleCard = ({data, addFavorite}) =>{
 
-
-
-
 const favoritesUpdate = (data)=>{
   addFavorite(data)
 }

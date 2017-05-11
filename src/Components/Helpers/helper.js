@@ -25,7 +25,7 @@ export default class Helper {
 
     const p1 = Promise.all(homeworldArray).then((homeworlds) =>{
       homeworlds.forEach((world, i)=>{
-        Object.assign(endData[i], {homeworld: world.name, population: world.population})
+        Object.assign(endData[i], {homeworld: world.name, population: world.population, type: 'person'})
       })
 
     }).catch((err) => console.log(err))
@@ -60,6 +60,9 @@ export default class Helper {
        }).catch((err) => console.log(err))
        return residentsArray
      })
+     endData.forEach((data, i) =>{
+       Object.assign(endData[i], {type: 'planet'})
+     })
      return endData
    }
 
@@ -71,7 +74,8 @@ export default class Helper {
         acc[vehicle.name].name = vehicle.name;
         acc[vehicle.name].model = vehicle.model;
         acc[vehicle.name].passengers = vehicle.passengers;
-        acc[vehicle.name].class = vehicle.vehicle_class;
+        acc[vehicle.name].class = vehicle.vehicle_class
+        acc[vehicle.name].type = "vehicle";
       }
       return acc;
     }, {});
