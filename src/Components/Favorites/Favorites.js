@@ -1,14 +1,15 @@
 import React from 'react'
 import './Favorites.css';
 
-const Favorites = () =>{
+const Favorites = ({favorite}) =>{
 
 
+  console.log(favorite)
   return(
     <div>
-      console.log(array.length)
-      <button className='favorites'>Favorites</button>
-      <div className='favoritesDisplay'>Yo</div>
+      <button className='favorites'>Favorites {favorite.length}</button>
+
+
     </div>
   )
 }

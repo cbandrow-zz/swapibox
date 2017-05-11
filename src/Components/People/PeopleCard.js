@@ -5,7 +5,7 @@ const PeopleCard = ({data, addFavorite}) =>{
 
 
 
-const favoritesUpdate = ()=>{
+const favoritesUpdate = (data)=>{
   addFavorite(data)
 }
 
@@ -13,7 +13,7 @@ const favoritesUpdate = ()=>{
     <div className = 'peopleCardInfo'>
       <h2>{data.name}</h2>
       <div className = "favoriteDiv"
-           onClick = {()=>favoritesUpdate()}>
+           onClick = {()=>favoritesUpdate(data)}>
         <p>FAV</p>
       </div>
       <p>{data.homeworld}</p>

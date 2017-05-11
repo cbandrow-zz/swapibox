@@ -23,6 +23,15 @@ class App extends Component {
 
   updateFavorites(favObj){
   let favoritesArray = this.state.favorites
+  if(favoritesArray.includes(favObj)){
+    let newFavoritesArray = favoritesArray.filter((obj)=>{
+      return obj !== favObj
+    })
+    this.setState({
+      favorites: newFavoritesArray
+    })
+    return
+  }
     favoritesArray.push(favObj)
     this.setState({
       favorites: favoritesArray
@@ -77,7 +86,7 @@ class App extends Component {
         </div>
 
         <div className='display'>
-          <Favorites favorites={this.state.favorites.bind(this)}/>
+          <Favorites favorite={this.state.favorites}/>
           <Controls buttonClick={this.showCards.bind(this)} />
 
           <Category
