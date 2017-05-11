@@ -21,6 +21,44 @@ class App extends Component {
     };
   }
 
+  componentDidMount(){
+    let num = this.helper.randomNumber();
+    fetch(`http://swapi.co/api/films/${num}/`).then((resp) =>  resp.json()).then((data) =>{
+        this.setState({
+          crawl : this.helper.cleanCrawl(data)
+        })
+      }).catch((err) => console.log(err))
+    this.allPromise().then((data) => {
+      this.helper.cleanPeople(data[0]).then((endData) =>{
+        this.setState({
+          people: endData
+        })
+      }).catch((err) => console.log(err))
+      let planetEnd = this.helper.cleanPlanets(data[1])
+      let vehicleEnd = this.helper.cleanVehicles(data[2])
+      this.setState({
+        planets: planetEnd,
+        vehicles: vehicleEnd
+      })
+    }).catch((err) => console.log(err))
+  }
+
+  allPromise(){
+    let people = fetch('http://swapi.co/api/people')
+      .then((resp) => resp.json())
+    let place = fetch('http://swapi.co/api/planets')
+      .then((resp) => resp.json())
+    let vehicles = fetch('http://swapi.co/api/vehicles')
+      .then((resp) => resp.json())
+
+    return Promise.all([people, place, vehicles])
+    .then((promiseArray) => {
+      return promiseArray.map((promise)=>{
+        return promise
+      })
+    }).catch((err) => console.log(err))
+  }
+
   updateFavorites(favObj){
   let favoritesArray = this.state.favorites
   if(favoritesArray.includes(favObj)){
@@ -38,39 +76,6 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
-    this.allPromise().then(data => {
-      let peopleData = this.helper.cleanPeople(data[0]);
-      let planetData = this.helper.cleanPlanets(data[1]);
-      let vehicleData = this.helper.cleanVehicles(data[2]);
-      let crawlData = this.helper.cleanCrawl(data[3]);
-      this.setState({
-        people: peopleData,
-        planets: planetData,
-        vehicles: vehicleData,
-        crawl: crawlData
-      });
-    });
-  }
-
-  allPromise() {
-    let num = this.helper.randomNumber();
-    let people = fetch("http://swapi.co/api/people").then(resp => resp.json());
-    let place = fetch("http://swapi.co/api/planets").then(resp => resp.json());
-    let vehicles = fetch("http://swapi.co/api/vehicles").then(resp =>
-      resp.json()
-    );
-    let crawl = fetch(`http://swapi.co/api/films/${num}/`).then(resp =>
-      resp.json()
-    );
-
-    return Promise.all([people, place, vehicles, crawl]).then(promiseArray => {
-      return promiseArray.map(promise => {
-        return promise;
-      });
-    });
-  }
-
   showCards(selection) {
     this.setState({
       selection: selection
@@ -80,20 +85,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
         <div className='storyScroll'>
           <StoryScroll scrollData={this.state.crawl} />
         </div>
-
         <div className='display'>
-          <Favorites favorite={this.state.favorites}/>
+          <Favorites favorite={this.state.favorites} />
           <Controls buttonClick={this.showCards.bind(this)} />
-
           <Category
             selection={this.state.selection}
             displayData={this.state[this.state.selection]}
-            addFavorite={this.updateFavorites.bind(this)}
-          />
+            addFavorite={this.updateFavorites.bind(this)} />
         </div>
       </div>
     );

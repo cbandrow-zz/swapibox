@@ -13,58 +13,56 @@ export default class Helper {
   }
 
   cleanPeople(data) {
-    let cleaned = data.results.reduce((acc, person) => {
-      if (!acc[person.name]) {
-        acc[person.name] = {};
-        acc[person.name].name = person.name;
+    const endData = []
+    const homeworldArray = data.results.map((person) =>{
+      endData.push(person)
+      return fetch(person.homeworld).then((resp) => resp.json())
+    })
 
-        fetch(person.homeworld)
-          .then(response => response.json())
-          .then(planet => {
-            acc[person.name].homeworld = planet.name;
-            acc[person.name].population = planet.population;
-            return;
-          });
-        fetch(person.species).then(response => response.json()).then(type => {
-          acc[person.name].species = type.name;
-          acc[person.name].language = type.language;
-          return;
-        });
-      }
-      return acc;
-    }, {});
+    const speciesArray = data.results.map((type) =>{
+      return fetch(type.species).then((resp) => resp.json())
+    })
 
-    let personArray = Object.keys(cleaned).map(key => {
-      return cleaned[key];
-    });
-    return personArray;
+    const p1 = Promise.all(homeworldArray).then((homeworlds) =>{
+      homeworlds.forEach((world, i)=>{
+        Object.assign(endData[i], {homeworld: world.name, population: world.population})
+      })
+
+    }).catch((err) => console.log(err))
+    const p2 = Promise.all(speciesArray).then((eachSpecies) =>{
+      eachSpecies.forEach((each, i) =>{
+        Object.assign(endData[i], {species: each.name, language: each.language})
+      })
+    }).catch((err) => console.log(err))
+
+    return Promise.all([p1, p2]).then(() => endData ).catch((err) => console.log(err))
   }
 
   cleanPlanets(data) {
-    // name, terrain, population, climate, residents
-    let cleaned = data.results.reduce((acc, planet) => {
-      if (!acc[planet.name]) {
-        acc[planet.name] = {};
-        acc[planet.name].name = planet.name;
-        acc[planet.name].terrain = planet.terrain;
-        acc[planet.name].climate = planet.climate;
-        acc[planet.name].population = planet.population;
-        acc[planet.name].residents = [];
+    const endData = []
+    let residentsArray = []
 
-        planet.residents.forEach(resident => {
-          fetch(resident).then(response => response.json()).then(resident => {
-            acc[planet.name].residents.push(resident.name);
-            return;
-          });
-        });
-      }
-      return acc;
-    }, {});
-    let planetsArray = Object.keys(cleaned).map(key => {
-      return cleaned[key];
-    });
-    return planetsArray
-  }
+     data.results.forEach((planet, i) =>{
+      endData.push(planet)
+      residentsArray = planet.residents.map((call) =>{
+         return fetch(call).then((resp) => resp.json()).catch((err) => console.log(err))
+       })
+       Promise.all(residentsArray).then((resident) =>{
+         let people = []
+         resident.forEach((item) =>{
+           if(item.name === "undefined"){
+             people.push('none')
+           } else {
+             people.push(item.name)
+           }
+           Object.assign(endData[i], {residents: people})
+         })
+       }).catch((err) => console.log(err))
+       return residentsArray
+     })
+     return endData
+   }
+
 
   cleanVehicles(data) {
     let cleaned = data.results.reduce((acc, vehicle) => {
