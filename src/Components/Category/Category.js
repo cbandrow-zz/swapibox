@@ -4,7 +4,7 @@ import PeopleCard from "../People/PeopleCard.js";
 import PlanetCard from "../Planets/PlanetCard.js";
 import VehicleCard from "../Vehicles/VehicleCard.js";
 // import FavoriteCard from "../FavoritesCard/FavoriteCard.js"
-const Category = ({ selection, displayData, addFavorite }) => {
+const Category = ({ selection, displayData, addFavorite, favorites }) => {
   if (selection === "favorites"){
     return(
       <div className = "category">
@@ -14,21 +14,24 @@ const Category = ({ selection, displayData, addFavorite }) => {
             return(
               <div key = {favorite.name}>
                 <PeopleCard data={favorite}
-                            addFavorite = {addFavorite}/>
+                            addFavorite = {addFavorite}
+                            favorites = {favorites}/>
               </div>
             )
           } else if (favorite.type === "planet"){
             return(
               <div key = {favorite.name}>
                 <PlanetCard data={favorite}
-                            addFavorite = {addFavorite}/>
+                            addFavorite = {addFavorite}
+                            favorites = {favorites}/>
               </div>
             )
           } else if(favorite.type === "vehicle"){
             return(
               <div key = {favorite.name}>
                 <VehicleCard data = {favorite}
-                             addFavorite = {addFavorite}/>
+                             addFavorite = {addFavorite}
+                             favorites = {favorites}/>
               </div>
             )
           }
@@ -42,7 +45,8 @@ const Category = ({ selection, displayData, addFavorite }) => {
           return(
             <div key={person.name}>
             <PeopleCard data={person}
-                        addFavorite = {addFavorite}/>
+                        addFavorite = {addFavorite}
+                        favorites = {favorites}/>
             </div>
           )
         })}
@@ -55,7 +59,8 @@ const Category = ({ selection, displayData, addFavorite }) => {
           return (
             <div key={planet.name}>
               <PlanetCard data={planet}
-                          addFavorite = {addFavorite}/>
+                          addFavorite = {addFavorite}
+                          favorites = {favorites}/>
             </div>
           )
         })}
@@ -68,7 +73,8 @@ const Category = ({ selection, displayData, addFavorite }) => {
           return(
             <div key={vehicle.name}>
               <VehicleCard data = {vehicle}
-                           addFavorite = {addFavorite}/>
+                           addFavorite = {addFavorite}
+                           favorites = {favorites}/>
             </div>
           )
         })}

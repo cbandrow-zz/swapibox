@@ -95,7 +95,8 @@ class App extends Component {
           <Category
             selection={this.state.selection}
             displayData={this.state[this.state.selection]}
-            addFavorite={this.updateFavorites.bind(this)} />
+            addFavorite={this.updateFavorites.bind(this)}
+            favorites = {this.state.favorites}/>
         </div>
       </div>
     );
