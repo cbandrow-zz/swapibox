@@ -8,7 +8,6 @@ const Category = ({ selection, displayData, addFavorite }) => {
     return(
       <div className = "category">
         {displayData.map((person) =>{
-          console.log(person)
           return(
             <div key={person.name}>
             <PeopleCard data={person}

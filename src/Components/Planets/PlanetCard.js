@@ -12,7 +12,7 @@ const PlanetCard = ({data}) =>{
       <p>{data.terrain}</p>
       <p>{data.population}</p>
       <p>{data.climate}</p>
-      <p>{data.residents}</p>
+      <p>{`${data.residents} `}</p>
     </div>
   )
 }

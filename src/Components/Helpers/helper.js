@@ -45,7 +45,7 @@ export default class Helper {
      data.results.forEach((planet, i) =>{
       endData.push(planet)
       residentsArray = planet.residents.map((call) =>{
-         return fetch(call).then((resp) => resp.json())
+         return fetch(call).then((resp) => resp.json()).catch((err) => console.log(err))
        })
        Promise.all(residentsArray).then((resident) =>{
          let people = []
@@ -57,7 +57,7 @@ export default class Helper {
            }
            Object.assign(endData[i], {residents: people})
          })
-       })
+       }).catch((err) => console.log(err))
        return residentsArray
      })
      return endData
