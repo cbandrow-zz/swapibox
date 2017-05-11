@@ -17,8 +17,8 @@ const StoryScroll = ({ scrollData }) =>{
   )
 }
 
-StoryScroll.propTypes = {
-  scrollData: PropTypes.object,
-}
+// StoryScroll.propTypes = {
+//   scrollData: PropTypes.object,
+// }
 
 export default StoryScroll

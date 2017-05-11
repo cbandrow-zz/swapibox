@@ -16,7 +16,8 @@ class App extends Component {
       vehicles: [],
       crawl: [],
       selection: "",
-      favorites: []
+      favorites: [],
+      errorStatus: ''
     };
   }
 
@@ -26,20 +27,32 @@ class App extends Component {
         this.setState({
           crawl : this.helper.cleanCrawl(data)
         })
-      }).catch((err) => console.log(err))
+      }).catch((err) => {
+        this.setState({
+          errorStatus: 'Error fetching Films'
+        })
+      })
     this.allPromise().then((data) => {
       this.helper.cleanPeople(data[0]).then((endData) =>{
         this.setState({
           people: endData
         })
-      }).catch((err) => console.log(err))
+      }).catch((err) => {
+        this.setState({
+          errorStatus: 'Error fetching people'
+        })
+      })
       let planetEnd = this.helper.cleanPlanets(data[1])
       let vehicleEnd = this.helper.cleanVehicles(data[2])
       this.setState({
         planets: planetEnd,
         vehicles: vehicleEnd
       })
-    }).catch((err) => console.log(err))
+    }).catch((err) => {
+      this.setState({
+        errorStatus: 'Error fetching Planets or Vehicles'
+      })
+    })
   }
 
   allPromise(){

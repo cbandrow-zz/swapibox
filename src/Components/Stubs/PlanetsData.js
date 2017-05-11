@@ -1,4 +1,4 @@
-module.exports =
+export const mockPlanets = 
 [
 {
     "count": 61,
