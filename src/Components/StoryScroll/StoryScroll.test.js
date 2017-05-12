@@ -9,8 +9,20 @@ import Helper from "../Helpers/helper.js";
 describe("scroll", () => {
   const wrapper = shallow(
     <StoryScroll scrollData={mockFilm}
-     errorStatus={""} />
+    errorStatus={""} />
   );
-  it("renders the movie description", () => {});
-  console.log(wrapper.find('.scroll'))
+
+  it("renders the movie title", () => {
+    expect(wrapper.find(".movieTitle").length).toEqual(1)
+  });
+
+  it("renders the movie release date", () => {
+    expect(wrapper.find(".movieRelease").length).toEqual(1)
+  });
+
+  it("renders the movie description", () => {
+    expect(wrapper.find(".movieCrawl").length).toEqual(1)
+  });
+
+
 });
