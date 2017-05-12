@@ -139,7 +139,7 @@ describe('Main Application Tests', () =>{
     expect(wrapper.find('PeopleCard').length).toEqual(2);
   })
 
-  it('should return plaents and prepend it on the page', async () =>{
+  it('should return planets and prepend it on the page', async () =>{
 
     fetchMock.get("http://swapi.co/api/planets", { status: 200, body: mockPlanets})
 
