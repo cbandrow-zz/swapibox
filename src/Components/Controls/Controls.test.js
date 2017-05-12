@@ -5,6 +5,8 @@ import fetchMock from 'fetch-mock'
 import {shallow, mount} from 'enzyme'
 
 describe('Controls Tests', () =>{
+  
+
   it('should render three buttons', () =>{
     let mockFn = jest.fn()
     const wrapper = shallow(<Controls onClick = {() => mockFn}/>)
@@ -18,6 +20,6 @@ describe('Controls Tests', () =>{
     const buttonFound = wrapper.find('button').first()
     buttonFound.simulate('click')
 
-    expect(mockFn).toBeCalled() 
+    expect(mockFn).toBeCalled()
   })
 })
