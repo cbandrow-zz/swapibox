@@ -12,69 +12,108 @@ describe("Category", () => {
 
   it('should render a container to display cards', ()=>{
     const mockFn = jest.fn()
-    const wrapper = mount(<Category displayData = {mockPlanets}
+    const wrapper = mount(<Category displayData = {planetData}
                                       addFavorite = {mockFn}
                                       favorites = {[]}
-                                      selection = {""}/>)
+                                      selection = {''}/>)
     expect(wrapper.find('div').length).toEqual(1)
+    expect(wrapper.find('.default').length).toEqual(1)
     expect(wrapper.find('.default').text()).toEqual('Select a Category, Yes?')
+  })
+
+  it('should render two planet cards based on display data', () =>{
+    const mockFn = jest.fn()
+    const wrapper = mount(<Category displayData = {planetData}
+                                      addFavorite = {mockFn}
+                                      favorites = {[]}
+                                      selection = {"planets"}/>)
+    expect(wrapper.find('PlanetCard').length).toEqual(2)
+  })
+
+  it('should render two people cards based on display data', () =>{
+    const mockFn = jest.fn()
+    const wrapper = mount(<Category displayData = {peopleData}
+                                      addFavorite = {mockFn}
+                                      favorites = {[]}
+                                      selection = {"people"}/>)
+    expect(wrapper.find('PeopleCard').length).toEqual(2)
+  })
+
+  it('should render two vehicle cards based on display data', () =>{
+    const mockFn = jest.fn()
+    const wrapper = mount(<Category displayData = {vehicleData}
+                                      addFavorite = {mockFn}
+                                      favorites = {[]}
+                                      selection = {"vehicles"}/>)
+    expect(wrapper.find('VehicleCard').length).toEqual(2)
+  })
+
+  it('should render two favorite cards based on display data', () =>{
+    const mockFn = jest.fn()
+    const wrapper = mount(<Category displayData = {favoriteData}
+                                      addFavorite = {mockFn}
+                                      favorites = {[favoriteOne, favoriteTwo]}
+                                      selection = {"favorites"}/>)
+    expect(wrapper.find('VehicleCard').length).toEqual(1)
+    expect(wrapper.find('PeopleCard').length).toEqual(1)
   })
 
   const favoriteOne =
     {
         "name": "Luke Skywalker",
-        "height": "172",
-        "mass": "77",
-        "hair_color": "blond",
-        "skin_color": "fair",
-        "eye_color": "blue",
-        "birth_year": "19BBY",
-        "gender": "male",
-        "homeworld": "http://swapi.co/api/planets/1/",
-        "films": [
-            "http://swapi.co/api/films/2/",
-            "http://swapi.co/api/films/6/",
-            "http://swapi.co/api/films/3/",
-            "http://swapi.co/api/films/1/",
-            "http://swapi.co/api/films/7/"
-        ],
+        "homeworld": "Tatooine",
         "species": [
-            "http://swapi.co/api/species/1/"
+            "human"
         ],
-        "vehicles": [
-            "http://swapi.co/api/vehicles/14/",
-            "http://swapi.co/api/vehicles/30/"
-        ],
-        "starships": [
-            "http://swapi.co/api/starships/12/",
-            "http://swapi.co/api/starships/22/"
-        ],
-        "created": "2014-12-09T13:50:51.644000Z",
-        "edited": "2014-12-20T21:17:56.891000Z",
         "type" : "person",
-        "url": "http://swapi.co/api/people/1/"
+        "language": "english"
     }
     const favoriteTwo = {
         "name": "Sand Crawler",
         "model": "Digger Crawler",
-        "manufacturer": "Corellia Mining Corporation",
-        "cost_in_credits": "150000",
-        "length": "36.8",
-        "max_atmosphering_speed": "30",
-        "crew": "46",
         "passengers": "30",
-        "cargo_capacity": "50000",
-        "consumables": "2 months",
-        "vehicle_class": "wheeled",
-        "pilots": [],
-        "films": [
-            "http://swapi.co/api/films/5/",
-            "http://swapi.co/api/films/1/"
-        ],
-        "created": "2014-12-10T15:36:25.724000Z",
-        "edited": "2014-12-22T18:21:15.523587Z",
+        "class": "wheeled",
         "type" : "vehicle",
-        "url": "http://swapi.co/api/vehicles/4/"
     }
+
+    let favoriteData = [favoriteOne, favoriteTwo]
+
+    const vehicleData = [ { 'name': 'Sand Crawler',
+         'model': 'Digger Crawler',
+         'passengers': '30',
+         'class': 'wheeled',
+         'type': 'vehicle' },
+       { 'name': 'T-16 skyhopper',
+         model: 'T-16 skyhopper',
+         passengers: '1',
+         class: 'repulsorcraft',
+         type: 'vehicle' } ]
+
+    const planetData = [ { name: 'Alderaan',
+          climate: 'temperate',
+          terrain: 'grasslands, mountains',
+          population: '2000000000',
+          residents:
+           [ 'Princess Leia',
+             'Papa Leia',
+             'Wedge Antilles' ],
+          type: 'planet' },
+        { name: 'Yavin IV',
+          climate: 'temperate, tropical',
+          terrain: 'jungle, rainforests',
+          population: '1000',
+          residents: [],
+          type: 'planet' } ]
+
+    const peopleData = [ { name: 'Luke Skywalker',
+          homeworld: 'Tatooine',
+          species: [ 'Human' ],
+          language : 'english',
+          type : 'person'},
+        { name: 'C-3PO',
+          homeworld: 'Tatooine',
+          species: [ 'Human' ],
+          language : 'english',
+          type: 'person'} ]
 
 });

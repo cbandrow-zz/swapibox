@@ -94,7 +94,9 @@ const Category = ({ selection, displayData, addFavorite, favorites }) => {
     )
   }
   return(
-    <div className = 'Category'>Select a Category</div>
+    <div className = 'Category'>
+      <h2 className = "default" >Select a Category, Yes?</h2>
+    </div>
   )
 };
 
