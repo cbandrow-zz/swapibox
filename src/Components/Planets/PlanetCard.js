@@ -12,7 +12,7 @@ const favoritesUpdate = (data) =>{
       <div className = {`favoriteDiv ${favoriteCss(data, favorites)}`}
         onClick = {()=>favoritesUpdate(data)}>
       </div>
-      <h2>Name: {data.name}</h2>
+      <h2>{data.name}</h2>
       <p>Terrain: {data.terrain}</p>
       <p>Population: {data.population}</p>
       <p>Climate: {data.climate}</p>
