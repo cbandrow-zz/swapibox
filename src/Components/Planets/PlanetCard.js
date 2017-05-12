@@ -9,15 +9,14 @@ const favoritesUpdate = (data) =>{
 
   return(
     <div className = "planetCardInfo">
-      <h2>{data.name}</h2>
       <div className = {`favoriteDiv ${favoriteCss(data, favorites)}`}
-           onClick = {()=>favoritesUpdate(data)}>
-        <p>FAV</p>
+        onClick = {()=>favoritesUpdate(data)}>
       </div>
-      <p>{data.terrain}</p>
-      <p>{data.population}</p>
-      <p>{data.climate}</p>
-      <p>{`${data.residents} `}</p>
+      <h2>Name: {data.name}</h2>
+      <p>Terrain: {data.terrain}</p>
+      <p>Population: {data.population}</p>
+      <p>Climate: {data.climate}</p>
+      <p>Famous Folk: {`${data.residents} `}</p>
     </div>
   )
 }

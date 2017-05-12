@@ -23,52 +23,55 @@ class App extends Component {
 
   componentDidMount(){
     let num = this.helper.randomNumber();
+    this.allPromise();
     fetch(`http://swapi.co/api/films/${num}/`).then((resp) =>  resp.json()).then((data) =>{
         this.setState({
           crawl : this.helper.cleanCrawl(data)
         })
       }).catch((err) => {
         this.setState({
-          errorStatus: 'Error fetching Films'
+          errorStatus: 'Error fetching'
         })
       })
-    this.allPromise().then((data) => {
-      this.helper.cleanPeople(data[0]).then((endData) =>{
-        this.setState({
-          people: endData
-        })
-      }).catch((err) => {
-        this.setState({
-          errorStatus: 'Error fetching people'
-        })
-      })
-      let planetEnd = this.helper.cleanPlanets(data[1])
-      let vehicleEnd = this.helper.cleanVehicles(data[2])
-      this.setState({
-        planets: planetEnd,
-        vehicles: vehicleEnd
-      })
-    }).catch((err) => {
-      this.setState({
-        errorStatus: 'Error fetching Planets or Vehicles'
-      })
-    })
   }
 
   allPromise(){
-    let people = fetch('http://swapi.co/api/people')
-      .then((resp) => resp.json())
-    let place = fetch('http://swapi.co/api/planets')
-      .then((resp) => resp.json())
-    let vehicles = fetch('http://swapi.co/api/vehicles')
-      .then((resp) => resp.json())
-
-    return Promise.all([people, place, vehicles])
-    .then((promiseArray) => {
-      return promiseArray.map((promise)=>{
-        return promise
+    fetch('http://swapi.co/api/people')
+      .then((resp) => resp.json()).then((data) =>{
+        this.helper.cleanPeople(data).then((endData) =>{
+            this.setState({
+              people: endData
+            })
+          })
+        }).catch((err) => {
+          this.setState({
+            errorStatus: 'Error fetching'
+        })
       })
-    }).catch((err) => console.log(err))
+
+    fetch('http://swapi.co/api/planets')
+      .then((resp) => resp.json()).then((data) =>{
+        let endPlanets = this.helper.cleanPlanets(data)
+        this.setState({
+          planets: endPlanets
+        })
+      }).catch((err) => {
+        this.setState({
+          errorStatus: 'Error fetching'
+        })
+      })
+
+    fetch('http://swapi.co/api/vehicles')
+      .then((resp) => resp.json()).then((data) =>{
+        let endVehicles = this.helper.cleanVehicles(data)
+        this.setState({
+          vehicles: endVehicles
+        })
+      }).catch((err) => {
+        this.setState({
+          errorStatus: 'Error fetching'
+      })
+    })
   }
 
   updateFavorites(favObj){
@@ -98,7 +101,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className='storyScroll'>
-          <StoryScroll scrollData={this.state.crawl} />
+          <StoryScroll scrollData={this.state.crawl}
+                       errorStatus = {this.state.errorStatus}/>
         </div>
         <div className='display'>
           <Favorites favorite={this.state.favorites}
