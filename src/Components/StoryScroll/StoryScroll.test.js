@@ -1,5 +1,14 @@
-import React from 'react'
+import React from "react";
+import ReactDOM from "react-dom";
 import StoryScroll from './StoryScroll.js';
-import { shallow, mount } from 'enzyme';
-import ReactDOM from 'react-dom';
-import fetchMock from 'fetch-mock'
+import fetchMock from "fetch-mock";
+import { shallow, mount } from "enzyme";
+import mockFilm from "../Stubs/FilmData.json";
+import Helper from "../Helpers/helper.js";
+
+describe("scroll", () => {
+  it.skip('should display movie description', ()=>{
+
+  })
+
+});
