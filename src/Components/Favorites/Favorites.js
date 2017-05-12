@@ -6,10 +6,10 @@ const Favorites = ({favorite, buttonClick}) =>{
 
   return(
     <div>
-              <h1> SwapiBox </h1>
-              <button className='favorites'
-              onClick = {()=>{buttonClick('favorites')}}>Favorites {favorite.length}</button>
-              <hr/>
+      <h1> SwapiBox </h1>
+        <button className='favorites'
+          onClick = {()=>{buttonClick('favorites')}}>Favorites {favorite.length}</button>
+      <hr/>
     </div>
   )
 }
