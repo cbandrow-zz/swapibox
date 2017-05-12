@@ -21,6 +21,18 @@ describe("Category", () => {
     expect(wrapper.find('.default').text()).toEqual('Select a Category, Yes?')
   })
 
+  it('renders cards in the category class screen and starts without cards', () => {
+
+    const mockClick = jest.fn();
+
+    const wrapper = shallow(<Category selection={""}
+                                    displayData={mockPlanets}
+                                    addFavorite={mockClick}
+                                    favorites = {[]}/>)
+
+    expect(wrapper.find('.category').length).toBe(0)
+  })
+
   it('should render two planet cards based on display data', () =>{
     const mockFn = jest.fn()
     const wrapper = mount(<Category displayData = {planetData}
