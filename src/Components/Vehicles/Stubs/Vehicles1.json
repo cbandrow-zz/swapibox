@@ -1,6 +1,4 @@
-export const mockVehicles = 
-[
-  {
+{
     "count": 39,
     "next": "http://swapi.co/api/vehicles/?page=2",
     "previous": null,
@@ -218,4 +216,3 @@ export const mockVehicles =
         }
     ]
 }
-]
