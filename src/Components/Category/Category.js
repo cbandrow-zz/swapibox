@@ -89,7 +89,7 @@ const Category = ({ selection, displayData, addFavorite, favorites }) => {
   } else if (!displayData){
     return(
       <div>
-        <h2>Did you ever hear the tragedy of Darth Plagueis the wise?</h2>
+        <h2 className = "default" >Select a Category, Yes?</h2>
       </div>
     )
   }
