@@ -2,7 +2,6 @@
   padding: 5%;
   display: flex;
   text-align: center;
-  background-color: #bdbdbd;
 }
 
 .storyScroll{
@@ -10,7 +9,6 @@
   width: 40%;
   flex-direction: column;
   height: auto;
-  border: solid red 1px;
 }
 
 .display{
@@ -18,4 +16,8 @@
   width: 60%;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.display h1{
+  color: #fdfdfd;
 }

@@ -30,7 +30,7 @@ class App extends Component {
         })
       }).catch((err) => {
         this.setState({
-          errorStatus: 'Error fetching Films'
+          errorStatus: 'Error fetching'
         })
       })
   }
@@ -45,29 +45,31 @@ class App extends Component {
           })
         }).catch((err) => {
           this.setState({
-            errorStatus: 'Error fetching people'
+            errorStatus: 'Error fetching'
         })
       })
 
     fetch('http://swapi.co/api/planets')
       .then((resp) => resp.json()).then((data) =>{
+        let endPlanets = this.helper.cleanPlanets(data)
         this.setState({
-          planets: this.helper.cleanPlanets(data)
+          planets: endPlanets
         })
       }).catch((err) => {
         this.setState({
-          errorStatus: 'Error fetching planets'
+          errorStatus: 'Error fetching'
         })
       })
 
     fetch('http://swapi.co/api/vehicles')
       .then((resp) => resp.json()).then((data) =>{
+        let endVehicles = this.helper.cleanVehicles(data)
         this.setState({
-          vehicles: this.helper.cleanVehicles(data)
+          vehicles: endVehicles
         })
       }).catch((err) => {
         this.setState({
-          errorStatus: 'Error fetching vehicles'
+          errorStatus: 'Error fetching'
       })
     })
   }
@@ -99,7 +101,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className='storyScroll'>
-          <StoryScroll scrollData={this.state.crawl} />
+          <StoryScroll scrollData={this.state.crawl}
+                       errorStatus = {this.state.errorStatus}/>
         </div>
         <div className='display'>
           <Favorites favorite={this.state.favorites}

@@ -2,18 +2,30 @@
   margin-left: auto;
   margin-right: auto;
   display: inline-block;
-  border: solid green 2px;
   width: 300px;
   height: 200px;
+  background-color: rgba(255,255,255, 0.8);
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: left;
+}
+.vehicleCardInfo, p, h2{
+  margin-left: 7px;
 }
 
 .favoriteDiv{
   float: right;
-  border: solid red 1px;
+  border: solid black 1px;
   width: 50px;
   height: 50px;
+  background-image: url('../../images/inactive.png');
+  background-size: cover;
+
 }
 
 .favorite{
-  background-color: red;
+  background-image: url('../../images/active.png');
+  background-size: cover;
+  border: solid red 1px;
+
 }

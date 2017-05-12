@@ -8,14 +8,13 @@ const VehicleCard = ({data, addFavorite, favorites}) =>{
   }
   return(
     <div className = "vehicleCardInfo">
-      <h2>{data.name}</h2>
       <div className = {`favoriteDiv ${favoriteCss(data, favorites)}`}
-           onClick = {()=>favoritesUpdate(data)}>
-        <p>FAV</p>
+        onClick = {()=>favoritesUpdate(data)}>
       </div>
-      <p>{data.model}</p>
-      <p>{data.class}</p>
-      <p>{data.passengers}</p>
+      <h2>Name: {data.name}</h2>
+      <p>Model: {data.model}</p>
+      <p>Class: {data.class}</p>
+      <p>Passengers: {data.passengers}</p>
     </div>
   )
 }
