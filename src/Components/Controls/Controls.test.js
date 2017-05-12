@@ -18,6 +18,6 @@ describe('Controls Tests', () =>{
     const buttonFound = wrapper.find('button').first()
     buttonFound.simulate('click')
 
-    expect(mockFn).toBeCalled()
+    expect(mockFn).toBeCalled() 
   })
 })
