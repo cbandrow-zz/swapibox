@@ -44,6 +44,7 @@ describe("Helper function test", () => {
       results = endData
     })
     await resolveAfter2Seconds()
+
     expect(results.length).toEqual(2);
     expect(results[0].name).toEqual("Luke Skywalker");
     expect(results[1].name).toEqual("C-3PO");
